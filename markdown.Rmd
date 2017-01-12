@@ -1,31 +1,21 @@
 ---
-title: "Homework I"
-author: "Benedetto Jacopo Buratti"
+title: "Some Random Algorithms for Random Things"
+author: "Benedetto Jacopo Buratti - Homework I"
 date: "January 12, 2017"
 output: 
   pdf_document: 
     latex_engine: xelatex
 ---
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+\abstract
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in felis rhoncus, vehicula tellus eget, lobortis mauris. Integer mollis laoreet aliquet. Donec vitae sem non augue rutrum venenatis id at mauris. Nunc aliquet eros est. Proin aliquet vulputate risus eu aliquam. Integer aliquet urna risus, a tempus ex ornare sit amet. Maecenas et augue vel dui finibus rutrum ut a urna. In at est fringilla, imperdiet dui egestas, faucibus diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi purus dui, malesuada sed lacinia quis, gravida eu felis. In hac habitasse platea dictumst. Pellentesque placerat quam eget eleifend interdum.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+\section{Beta-Bernoulli Conjugate analysis}
+\subsection{Parametric Space of Intrest}
+\textbf{Definition 1.1} A \textit{parametric space} is the set of all possible combinations of values for all the different parameters contained in a particular mathematical model 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Given the previous definition the parametric space of interest, which is the probability of success of a single event, is $\Theta \in [0,1]$
