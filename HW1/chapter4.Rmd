@@ -1,0 +1,5 @@
+\section{Beta-Bernoulli Conjugate analysis}
+\subsection{Parametric Space of Intrest}
+\textbf{Definition 1.1} A \textit{parametric space} is the set of all possible combinations of values for all the different parameters contained in a particular mathematical model 
+
+Given the previous definition the parametric space of interest, which is the probability of success of a single event, is $\Theta \in [0,1]$
