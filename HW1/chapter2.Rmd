@@ -1,5 +1,40 @@
-\section{Beta-Bernoulli Conjugate analysis}
-\subsection{Parametric Space of Intrest}
-\textbf{Definition 1.1} A \textit{parametric space} is the set of all possible combinations of values for all the different parameters contained in a particular mathematical model 
+\section{Conjugate Analysis on the Dugongs Sample}
 
-Given the previous definition the parametric space of interest, which is the probability of success of a single event, is $\Theta \in [0,1]$
+\subsection{Likelihood}
+First of all we to load the Dugongs into R:
+
+```{r doppler plot, echo=FALSE, include = TRUE, fig.width=7, fig.height=4, fig.align='center' , tidy=TRUE}
+list(x = c( 1.0, 1.5, 1.5, 1.5, 2.5, 4.0, 5.0, 5.0, 7.0,
+8.0, 8.5, 9.0, 9.5, 9.5, 10.0, 12.0, 12.0, 13.0,
+13.0, 14.5, 15.5, 15.5, 16.5, 17.0, 22.5, 29.0, 31.5),
+Y = c(1.80, 1.85, 1.87, 1.77, 2.02, 2.27, 2.15, 2.26, 2.47,
+2.19, 2.26, 2.40, 2.39, 2.41, 2.50, 2.32, 2.32, 2.43,
+2.47, 2.56, 2.65, 2.47, 2.64, 2.56, 2.70, 2.72, 2.57), N = 27)
+```
+
+
+As reported on dataset \href{http://www.openbugs.net/Examples/Dugongs.html}{website} $Y_i \sim N(m_i, t)$, with:
+
+
+\begin{enumerate}
+\item $i = 1,...,27$  
+\item $m_i=a-bg^{X_i}$
+\item $a,b>0$
+\item $0<g<1$ 
+\end{enumerate}
+
+
+Hence, according to definition 1.1 the likelihood for the given dataset is:
+
+\begin{equation}
+\mathcal{L}_{\textbf{x}}(\theta)= \prod_{i=1}^{27}\theta^{x_i}\frac{1}{\sigma\sqrt{2\pi}}exp{\frac{1}{2}(\frac{x_i-\alpha-s\beta\gamma^{x_i}}{\tau})}
+\end{equation}
+
+\subsection{Maximum Likelihood Estimate}
+Now that we have the maximum likelihood estimate, we are able to compute the MLE using opt
+
+\subsection{Vector of parameters of Interest}
+
+\subsection{Maximum a Posteriori Estimates}
+
+
