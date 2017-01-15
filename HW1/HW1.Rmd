@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 \abstract
 This first homework covers the main concepts behind bayesian inference and some related issues. In the \textbf{first} and \textbf{second} exercises we focus on conjugate analysis, a classical approach to bayesian inference, used in the special occasion where the posterior distribution has the same distribution of the likelihood function. In the \textbf{third} and \textbf{fourth} exercise we introduce the Integral Transformation Formula, which will be the core, with unifrom pseudo-random numer generator of exercises \textbf{fifth} and \textbf{sixth} Finally in the \textbf{seventh}, \textbf{eighth} and \textbf{nineth} exerices we introduce and use the acceptance and rejection algorithm and apply in in a variety of situations.  
 
+<!--
 \begin{enumerate}
 \item Fundamental ingredients to carry out Bayesian Inference
 \item Dugongs: frequentist vs bayesian approach
@@ -24,34 +25,34 @@ This first homework covers the main concepts behind bayesian inference and some 
 \item General Acceprance-Rejection algorithm
 \item Generate from a Normal distribution from a Cauchy distribution using A/R 
 \end{enumerate}
-
+-->
 \tableofcontents
 
 
-
+\newpage
 ```{r child = 'chapter1.Rmd'}
 ```
-
+\newpage
 ```{r child = 'chapter2.Rmd'}
 ```
-
+\newpage
 ```{r child = 'chapter3.Rmd'}
 ```
-
+\newpage
 ```{r child = 'chapter4.Rmd'}
 ```
-
+\newpage
 ```{r child = 'chapter5.Rmd'}
 ```
-
+\newpage
 ```{r child = 'chapter6.Rmd'}
 ```
-
+\newpage
 ```{r child = 'chapter7.Rmd'}
 ```
-
+\newpage
 ```{r child = 'chapter8.Rmd'}
 ```
-
+\newpage
 ```{r child = 'chapter9.Rmd'}
 ```

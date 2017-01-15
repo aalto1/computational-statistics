@@ -1,4 +1,4 @@
-\section{Beta-Bernoulli Conjugate analysis}
+\section{Integral Transform Method}
 \subsection{Parametric Space of Intrest}
 \textbf{Definition 1.1} A \textit{parametric space} is the set of all possible combinations of values for all the different parameters contained in a particular mathematical model 
 
