@@ -1,6 +1,9 @@
 \section{Simulating a Pareto Distribution}
+```{r}
+library("VGAM")
+```
 
-\subsection{First Moment in Closed Form}
+\subsection{First Moment with Monte Carlo}
 
 Given a a random variable distributed $X \sim Par(2.5, 1)$ which density is:
 
@@ -14,14 +17,32 @@ F_X(x) =
 \right.
 \end{equation}
 
+Which graph is:
 
-\subsection{First Moment Computation using Monte Carlo}
-
-First of all we define our Pareto function:
 ```{r}
-#x = dcauchy(100, location = 2,5, scale = 1)
-curve(dcauchy(x, 2,5, 1), -10, 10)
+x <- seq(from=1, to=100, by=0.01)
+first <- rpareto(900000, shape=2.5, scale=1)
+curve(dpareto(x, shape=2.5, scale=1), xlim = c(0,10), ylim=c(0,3), type="l", main="Pareto Distribution",
+     ylab="density", col="red")
 ```
+
+Since this is a well known distribution, of which first moment is easily computable in closed form, is intresting to check how closely a Monte Carlo simulation is able to estimate the exact parameter. 
+
+In order to do this we have two options:
+
+\begin{enumerate}
+\item Generate a random sample from R-Cran Built in Pareto distribution
+\item Use the Inverse Transform Method, using a Uniform Distribution as instrumental function
+\end{enumerate}
+
+The first option is pretty straightfoward since we can use R built in function:
+
+```{r}
+#curve(first, xlim=c(0,10))
+I_hat = mean(first)
+I_hat
+```
+
 
 \subsubsection{Approximate first moment up to precision $10^{-2}$}
 

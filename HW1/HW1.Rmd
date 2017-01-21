@@ -28,6 +28,15 @@ This first homework covers the main concepts behind bayesian inference and some 
 -->
 \tableofcontents
 
+#Glossary
+
+\begin{enumerate}
+\item p for "probability", the cumulative distribution function (c. d. f.)
+\item q for "quantile", the inverse c. d. f.
+\item d for "density", the density function (p. f. or p. d. f.)
+\item r for "random", a random variable having the specified distribution
+\end{enumerate}
+
 
 \newpage
 ```{r child = 'chapter1.Rmd'}
