@@ -1,14 +1,26 @@
 \section{Simulating a Pareto Distribution}
+
 \subsection{First Moment in Closed Form}
+
+Given a a random variable distributed $X \sim Par(2.5, 1)$ which density is:
+
+\begin{equation}
+F_X(x) =
+\left\{
+	\begin{array}{ll}
+		\frac{5}{2}x^{-\frac{7}{2}} &   \mbox{if} & x \geq 1 \\
+		0                           &   \mbox{if} & x < 1 
+	\end{array}
+\right.
+\end{equation}
+
 
 \subsection{First Moment Computation using Monte Carlo}
 
 First of all we define our Pareto function:
 ```{r}
-a = 2.5
-b = 1
-x= 3
-#f(x,a,b)= a*(b^a)/(x^(a+1))
+#x = dcauchy(100, location = 2,5, scale = 1)
+curve(dcauchy(x, 2,5, 1), -10, 10)
 ```
 
 \subsubsection{Approximate first moment up to precision $10^{-2}$}
