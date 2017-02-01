@@ -11,8 +11,8 @@ Given a a random variable distributed $X \sim Par(2.5, 1)$ which density is:
 F_X(x) =
 \left\{
 	\begin{array}{ll}
-		\frac{5}{2}x^{-\frac{7}{2}} &   \mbox{if} & x \geq 1 \\
-		0                           &   \mbox{if} & x < 1 
+		\frac{5}{2}x^{-\frac{7}{2}} &   \mbox{if  } x \geq 1 \\
+		0                           &   \mbox{if  } x < 1 
 	\end{array}
 \right.
 \end{equation}
@@ -21,7 +21,6 @@ Which graph is:
 
 ```{r}
 x <- seq(from=1, to=100, by=0.01)
-first <- rpareto(900000, shape=2.5, scale=1)
 curve(dpareto(x, shape=2.5, scale=1), xlim = c(0,10), ylim=c(0,3), type="l", main="Pareto Distribution",
      ylab="density", col="red")
 ```
@@ -35,23 +34,20 @@ In order to do this we have two options:
 \item Use the Inverse Transform Method, using a Uniform Distribution as instrumental function
 \end{enumerate}
 
+However, in advance to any techinque we need to know, exploiting the LLN, how many samples we need in order to estimate with a confidence of $10^-2$ the mean.
+
 The first option is pretty straightfoward since we can use R built in function:
 
 ```{r}
-#curve(first, xlim=c(0,10))
+first <- rpareto(85000, shape=2.5, scale=1)
 I_hat = mean(first)
 I_hat
 ```
+The second one consist in  the Integral Transform Method which using the inverse function of the Pareto and a Uniform RNG allows us to sample from a pareto:
 
+Since $Par(2.5,2)$ first moment is given by, we can see how the two approaches compares:
 
-\subsubsection{Approximate first moment up to precision $10^{-2}$}
-
-\subsubsection{Running Mean}
 
 \subsubsection{Empirical Distribution vs Desired Target Distribution}
 
-
-
-\textbf{Definition 1.1} A \textit{parametric space} is the set of all possible combinations of values for all the different parameters contained in a particular mathematical model 
-
-Given the previous definition the parametric space of interest, which is the probability of success of a single event, is $\Theta \in [0,1]$
+Now that can also check two different EDF and see that the while qualitatively there is no much difference between the two approaches, from a efficiency point of view there two order of magnitude slower.
