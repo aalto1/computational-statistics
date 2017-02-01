@@ -3,28 +3,48 @@ title: "HW2.Rmd"
 author: "Benedetto Jacopo Buratti"
 date: "February 1, 2017"
 output: pdf_document
----
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+\abstract
+This second homework covers the main concepts behind bayesian inference and some related issues. In the \textbf{first} and \textbf{second} exercises we focus on conjugate analysis, a classical approach to bayesian inference, used in the special occasion where the posterior distribution has the same distribution of the likelihood function. In the \textbf{third} and \textbf{fourth} exercise we introduce the Integral Transformation Formula, which will be the core, with unifrom pseudo-random numer generator of exercises \textbf{fifth} and \textbf{sixth} Finally in the \textbf{seventh}, \textbf{eighth} and \textbf{nineth} exerices we introduce and use the acceptance and rejection algorithm and apply in in a variety of situations.  
 
-## R Markdown
+<!--
+\begin{enumerate}
+\item Fundamental ingredients to carry out Bayesian Inference
+\item Dugongs: frequentist vs bayesian approach
+\item Introduction and application of the Integral Transformation Method (ITF)
+\item Mean and varaince of a transfromed distribution
+\item Generate a sequence of i.i.d random veviates with a Pareto distribution from a Uniform one (using ITF)
+\item Generate a sequence of i.i.d random veviates with a discrete distribution from a Uniform one (using ITF) 
+\item Simulate from a Beta(3,3) using Acceprance-Rejection algorithm.
+\item General Acceprance-Rejection algorithm
+\item Generate from a Normal distribution from a Cauchy distribution using A/R 
+\end{enumerate}
+-->
+\tableofcontents
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#Glossary
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+\begin{enumerate}
+\item p for "probability", the cumulative distribution function (c. d. f.)
+\item q for "quantile", the inverse c. d. f.
+\item d for "density", the density function (p. f. or p. d. f.)
+\item r for "random", a random variable having the specified distribution
+\end{enumerate}
 
-```{r cars}
-summary(cars)
+
+\newpage
+```{r child = 'chapter1.Rmd'}
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+\newpage
+```{r child = 'chapter2.Rmd'}
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+\newpage
+```{r child = 'chapter3.Rmd'}
+```
+\newpage
+```{r child = 'chapter4.Rmd'}
+```
+\newpage
+```{r child = 'chapter5.Rmd'}
