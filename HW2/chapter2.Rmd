@@ -1,2 +1,5 @@
 \section{Monte Carlo Markov Chain Essentials}
 
+\subsection{Expectation Estimation via MCMC}
+
+\subsection{MCMC Error Control}

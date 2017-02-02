@@ -1,4 +1,6 @@
 \section{Markov Chains Essentials}
+
+\subsection{Markov Chain Definition}
 Markov Process are sthocastics process which are usually defined as a collection of random variables. Markov Chains are useful to model random process which has a short memory dependence.
 
 We can have four types of Markov Chains:
@@ -38,10 +40,37 @@ In the end we obtain $P_y^t(\cdot)\rightarrow P^{\infty}_y=\pi(\cdot)$ or more s
 \hat{I} = \frac{1}{t}\sum^{T_0+t}_{i=T_0} h(\theta_i) \rightarrow E_{\pi}[h(\theta)] = I \quad for \ t  \rightarrow \infty
 \end{equation}
 
-Given a suitable Markov Chain defined by a Markov Kernel $K(x,\cdot)$ depends on the possibility of finding a suitable \pi such that $X_n \sim \pi \Rightarrow X_{n+1} \sim \pi$
+Given a suitable Markov Chain defined by a Markov Kernel $K(x,\cdot)$ depends on the possibility of finding a suitable $\pi$ such that $X_n \sim \pi \Rightarrow X_{n+1} \sim \pi$
 
 Thus the subsequent issue that we have to analyze how is possible to generate a stationary distribution from a Markov Chain.
-This requires a useful property defined as \textbf{Detailed Balance Condition} which than implies that the Markov Chain is reversible $Pr_{\pi}\{X_t \in A, X_{t+1} \in B\} = Pr\{{X_{t+1} \in A, X_t\in B}\}$ which is equivalent to $\pi(x)q(x,y) = \pi(y)q(y,x)$ given this backword transition 
+This requires a useful property defined as \textbf{Detailed Balance Condition} which than implies that the Markov Chain is reversible $Pr_{\pi}\{X_t \in A, X_{t+1} \in B\} = Pr\{{X_{t+1} \in A, X_t\in B}\}$ which is equivalent to $\pi(x)q(x,y) = \pi(y)q(y,x)$ given this backword transition.
+
+At this point we should be clear the working principle of Markov Chain Monte Carlo is pretty much the same as the Vanilla Monte Carlo, with the only difference that in this case we are not generating our samples from a distribution from a closed form but from a markov chaing.
+
+Essetially given a target density f, we build a markov kernel K with a stationary distirbution f and then generate a Markov Chain $X^{(t)}$ using this kernel so that the limiting distirbution is f and the integrals can be approximated according to the Egodic Theorem.
+
+The issue with this approach that is we need to be able to build a kernel K that is associated with an arbitray density f. To cope with this problem there are several approaches, among which the most notable are:
+
+\begin{itemize}
+\item Metropolis-Hasting
+\item Gibbs Algorithm
+\end{itemize}
+
+Those two algorithms are crucial in order to build a kernel that is able to approximate a target function. The two algorithms are summarized in the following tables, where pros and cons are compared.
+
+
+\begin{tabular}{|p{4cm}||p{4cm}|p{4cm}| }
+ \hline
+ \multicolumn{3}{|c|}{Markov Chain Generation Algorithms} \\
+ \hline
+ Feature/Algorithm & Metropolis-Hastings & Gibbs Sampling\\
+ \hline
+ Description & MC on a finite state space & MC on a general state space\\ 
+ Pros & Markov Process & Stochastic Process w/ Markov Property\\ [1ex] 
+ Cons & Markov Process & Stochastic Process w/ Markov Property\\ [1ex] 
+ Notes & Markov Process & Stochastic Process w/ Markov Property\\ [1ex] 
+ \hline
+\end{tabular}
 
 
 

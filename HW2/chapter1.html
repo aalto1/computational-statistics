@@ -120,6 +120,7 @@ $(document).ready(function () {
 
 
 
+
 <p>Markov Process are sthocastics process which are usually defined as a collection of random variables. Markov Chains are useful to model random process which has a short memory dependence.</p>
 <p>We can have four types of Markov Chains:</p>
 
@@ -129,10 +130,17 @@ $(document).ready(function () {
 
 
 <p>Markov Chains have several properties among which  and  at steady-state. More formally given a finite Markov Chain <span class="math inline">\(X_t,t \in \mathcal{T}\)</span> which is irreducible and poistive recurrent than after t stpes I get a random value: <span class="math inline">\(\theta_t \sim P^t_y(\cdot) = K^t(y,\cdot).\)</span> This is true thanks to the ergodic theorem, which holds in under the previous properties.</p>
-<p>In the end we obtain $P_y^t() P^{}_y = () $ or more specifically,</p>
+<p>In the end we obtain <span class="math inline">\(P_y^t(\cdot)\rightarrow P^{\infty}_y=\pi(\cdot)\)</span> or more specifically,</p>
 <span class="math display">\[\begin{equation}
-\hat{I} = \frac{1}{t}\sum^{T_0+t}_{i=T_0} h(\theta_i) \rightarrow E_{pi}[h(\theta)] = I \quad for \ t  \rightarrow \infty
+\hat{I} = \frac{1}{t}\sum^{T_0+t}_{i=T_0} h(\theta_i) \rightarrow E_{\pi}[h(\theta)] = I \quad for \ t  \rightarrow \infty
 \end{equation}\]</span>
+<p>Given a suitable Markov Chain defined by a Markov Kernel <span class="math inline">\(K(x,\cdot)\)</span> depends on the possibility of finding a suitable <span class="math inline">\(\pi\)</span> such that <span class="math inline">\(X_n \sim \pi \Rightarrow X_{n+1} \sim \pi\)</span></p>
+<p>Thus the subsequent issue that we have to analyze how is possible to generate a stationary distribution from a Markov Chain. This requires a useful property defined as  which than implies that the Markov Chain is reversible <span class="math inline">\(Pr_{\pi}\{X_t \in A, X_{t+1} \in B\} = Pr\{{X_{t+1} \in A, X_t\in B}\}\)</span> which is equivalent to <span class="math inline">\(\pi(x)q(x,y) = \pi(y)q(y,x)\)</span> given this backword transition.</p>
+<p>At this point we should be clear the working principle of Markov Chain Monte Carlo is pretty much the same as the Vanilla Monte Carlo, with the only difference that in this case we are not generating our samples from a distribution from a closed form but from a markov chaing.</p>
+<p>Essetially given a target density f, we build a markov kernel K with a stationary distirbution f and then generate a Markov Chain <span class="math inline">\(X^{(t)}\)</span> using this kernel so that the limiting distirbution is f and the integrals can be approximated according to the Egodic Theorem.</p>
+<p>The issue with this approach that is we need to be able to build a kernel K that is associated with an arbitray density f. To cope with this problem there are several approaches, among which the most notable are:</p>
+
+<p>Those two algorithms are crucial in order to build a kernel that is able to approximate a target function. The two algorithms are summarized in the following tables, where pros and cons are compared.</p>
 
 
 
