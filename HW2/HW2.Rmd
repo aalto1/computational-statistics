@@ -1,5 +1,5 @@
 ---
-title: "HW2.Rmd"
+title: "Markov Chain Monte Carlo and Bayesian Inference"
 author: "Benedetto Jacopo Buratti"
 date: "February 1, 2017"
 output: 
