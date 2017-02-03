@@ -21,6 +21,29 @@ setClass("markov_chain",
                       initial_state="numeric",
                       chain_size="numeric",
                       transition_matrix="matrix"))
+```
+
+\subsection{Markov Chain Simulation}
+
+We now define a function that would allows us to simulate our chain
+
+```{r, include = TRUE}
+#Markov Chain Simulator
+
+setMethod("simulate", signature("markov_chain"), function(object){
+  markov_chain <- c(vector(), 1:(object@chain_size+1))
+  markov_chain[1] = object@initial_state
+  
+  for(t in 1:object@chain_size){
+    markov_chain[t+1] <- sample(object@state_space, size = object@chain_size, prob=object@transition_matrix[markov_chain[t],], replace = TRUE)
+  }
+  return(markov_chain)
+})
+```
+
+Now that the we have all the necessary elements we can simulate our markov chain:
+
+```{r, include=TRUE}
 
 puppet_markov_chain <- new("markov_chain",
                            state_space = c(1,2,3),
@@ -31,29 +54,7 @@ puppet_markov_chain <- new("markov_chain",
 
 puppet_markov_chain
 
-```
-
-\subsection{Markov Chain Simulation}
-
-We now define a function that would allows us to simulate our chain
-
-```{r, include = TRUE}
-#Markov Chain Simulator
-markov_chain_simulator <- function(){
-  markov_chain <- c(vector(), 1:chain_size)
-  markov_chain[1] = initial_state
-  
-  for(t in 1:chain_size){
-    chain[t+1] <- sample(space.state, size = 1, prob=transition_matrix[markov_chain[t],])
-  }
-  return(markov_chain)
-}
-```
-
-Now that the we have all the necessary elements we can simulate our markov chain:
-
-```{r, include=TRUE}
-MC_simulator(state_space, X_0, chain_size, transition_matrix)
+print(simulate(puppet_markov_chain))
 ```
 \subsection{States Empirical Relative Frequency}
 
