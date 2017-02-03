@@ -9,13 +9,60 @@ First of all let's define the Markov Chain that we want to analyze:
    \caption{On the left the graphical reppresentaion of our Markov Chain and on the right its transition matrix}
 \end{figure}
 
-We initialize the Markov Chain setting its initial state to 1 and defining its state space:
+
+
+First of all we define a s4 object constructor for Markov Chains and than delcare an puppet markov chain:
 
 ```{r, include = TRUE}
-#Markov Chain Initializzation
-state_space = c(1,2,3)
-X_0 = 1
-sample_size = 1000
+#Markov Chains Constructor
+
+setClass("markov_chain",
+         slots = list(state_space="numeric",
+                      initial_state="numeric",
+                      chain_size="numeric",
+                      transition_matrix="matrix"))
+
+puppet_markov_chain <- new("markov_chain",
+                           state_space = c(1,2,3),
+                           initial_state = 1,
+                           chain_size = 1000,
+                           transition_matrix = matrix(c(0, 1/2, 1/2, 5/8, 1/8, 1/4, 2/3, 1/3, 0), nrow = 3, ncol = 3)
+                           )
+
+puppet_markov_chain
+
 ```
 
-We now define 
+\subsection{Markov Chain Simulation}
+
+We now define a function that would allows us to simulate our chain
+
+```{r, include = TRUE}
+#Markov Chain Simulator
+markov_chain_simulator <- function(){
+  markov_chain <- c(vector(), 1:chain_size)
+  markov_chain[1] = initial_state
+  
+  for(t in 1:chain_size){
+    chain[t+1] <- sample(space.state, size = 1, prob=transition_matrix[markov_chain[t],])
+  }
+  return(markov_chain)
+}
+```
+
+Now that the we have all the necessary elements we can simulate our markov chain:
+
+```{r, include=TRUE}
+MC_simulator(state_space, X_0, chain_size, transition_matrix)
+```
+\subsection{States Empirical Relative Frequency}
+
+\subsection{Simulation Repeatition}
+
+
+\subsection{Invariant Distribution $\pi$ (closed form)}
+
+\subsection{Evaluation}
+
+\subsection{Initial State Independecy}
+
