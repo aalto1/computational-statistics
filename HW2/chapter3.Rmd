@@ -31,11 +31,11 @@ We now define a function that would allows us to simulate our chain
 #Markov Chain Simulator
 
 setMethod("simulate", signature("markov_chain"), function(object){
-  markov_chain <- c(vector(), 1:(object@chain_size+1))
+  markov_chain <- c(vector(), 1:(object@chain_size-1))
   markov_chain[1] = object@initial_state
   
-  for(t in 1:object@chain_size){
-    markov_chain[t+1] <- sample(object@state_space, size = object@chain_size, prob=object@transition_matrix[markov_chain[t],], replace = TRUE)
+  for(t in 1:(object@chain_size)){
+    markov_chain[t+1] <- sample(object@state_space, size = (object@chain_size), prob=object@transition_matrix[markov_chain[t],], replace = TRUE)
   }
   return(markov_chain)
 })
@@ -43,7 +43,7 @@ setMethod("simulate", signature("markov_chain"), function(object){
 
 Now that the we have all the necessary elements we can simulate our markov chain:
 
-```{r, include=TRUE}
+```{r, include=FALSE}
 
 puppet_markov_chain <- new("markov_chain",
                            state_space = c(1,2,3),
@@ -54,15 +54,46 @@ puppet_markov_chain <- new("markov_chain",
 
 puppet_markov_chain
 
-print(simulate(puppet_markov_chain))
+markov_simulation <- simulate(puppet_markov_chain)
+
+plot(simulate(puppet_markov_chain), ylim=c(0,4), ylab = "Chain State", xlab = "Time", main = "Simulated Markov Chain")
 ```
 \subsection{States Empirical Relative Frequency}
 
+At this point is pretty straight forward to printthe empirical relative frequency of the three states
+```{r, include=TRUE}
+library(HistogramTools)
+PlotRelativeFrequency(hist(markov_simulation, plot = F), main="State")
+```
+
+
 \subsection{Simulation Repeatition}
+
+At this point we compute the simulation by calling
 
 
 \subsection{Invariant Distribution $\pi$ (closed form)}
+We can compute the invariant distribution by definition, hene:
 
+\begin{equation}
+\pi = \left(\begin{array}{c} \pi_1\\ \pi_2\\ \pi_3 \end{array}\right) = (\pi_1 \pi_2 \pi_3) \cdot
+\left(\begin{array}{c c c}
+0 & \frac{1}{2} & \frac{1}{2} \\
+\frac{5}{8} & \frac{1}{8} & \frac{1}{4} \\
+\frac{2}{3} & \frac{1}{3} & 0 \\ 
+\end{array})\right) = \pi P
+\end{equation}
+
+Which is subject to the costraint of a probability measure, indeed $\pi_1 + \pi_2 + \pi_3 = 1$ which 
+
+at this point the only thing that we have to do is to solve this system by substituting the second equation with  the constraint since is linear combination of the other equations:
+
+```{r, include= TRUE}
+library(limSolve)
+A = matrix(c(-1, 1/2, 1/2, 1, 5/8, -7/8, 1/4, 1, 2/3, 1/3, -1,1), nrow = 4, ncol = 3)
+b = c(0,0,0,1)
+print(Solve(A,b))
+```
 \subsection{Evaluation}
 
 \subsection{Initial State Independecy}
