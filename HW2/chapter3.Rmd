@@ -21,6 +21,14 @@ setClass("markov_chain",
                       initial_state="numeric",
                       chain_size="numeric",
                       transition_matrix="matrix"))
+
+setGeneric("MCSimulator", function(object) {
+  standardGeneric("MCSimulator")
+})
+
+setGeneric("set_initial_state", function(object, init_state ) {
+  standardGeneric("set_initial_state")
+})
 ```
 
 \subsection{Markov Chain Simulation}
@@ -30,7 +38,7 @@ We now define a function that would allows us to simulate our chain
 ```{r, include = TRUE}
 #Markov Chain Simulator
 
-setMethod("simulate", signature("markov_chain"), function(object){
+setMethod("MCSimulator", signature("markov_chain"), function(object){
   markov_chain <- c(vector(), 1:(object@chain_size-1))
   markov_chain[1] = object@initial_state
   
@@ -39,6 +47,10 @@ setMethod("simulate", signature("markov_chain"), function(object){
   }
   return(markov_chain)
 })
+
+setMethod("set_initial_state", signature("markov_chain", "numeric"), function(object, init_state){
+  object@initial_state <- init_state
+  return(object)})
 ```
 
 Now that the we have all the necessary elements we can simulate our markov chain:
@@ -52,11 +64,13 @@ puppet_markov_chain <- new("markov_chain",
                            transition_matrix = matrix(c(0, 1/2, 1/2, 5/8, 1/8, 1/4, 2/3, 1/3, 0), nrow = 3, ncol = 3)
                            )
 
+
+
 puppet_markov_chain
 
-markov_simulation <- simulate(puppet_markov_chain)
+markov_simulation <- MCSimulator(puppet_markov_chain)
 
-plot(simulate(puppet_markov_chain), ylim=c(0,4), ylab = "Chain State", xlab = "Time", main = "Simulated Markov Chain")
+plot(MCSimulator(puppet_markov_chain), ylim=c(0,4), ylab = "Chain State", xlab = "Time", main = "Simulated Markov Chain")
 ```
 \subsection{States Empirical Relative Frequency}
 
@@ -92,9 +106,36 @@ at this point the only thing that we have to do is to solve this system by subst
 library(limSolve)
 A = matrix(c(-1, 1/2, 1/2, 1, 5/8, -7/8, 1/4, 1, 2/3, 1/3, -1,1), nrow = 4, ncol = 3)
 b = c(0,0,0,1)
-print(Solve(A,b))
+analytical_invariant_distribution <- Solve(A,b)
+analytical_invariant_distribution
 ```
 \subsection{Evaluation}
 
+Now that we have the true analytical solution of our Markov Chain we want to check if our simulation is indeed a good approximation of this value. In order to compare those values we compare the two 
+gen
+```{r, include = TRUE}
+genziana <- as.vector(table(markov_simulation)/sum(markov_simulation))
+library(plotrix)
+l <- list(analytical_invariant_distribution, markov_simulation)
+multhist(l, beside = TRUE, freq = FALSE)
+
+```
+
 \subsection{Initial State Independecy}
 
+If we change the initial state, since the Markov chain is irreducible and positive recurrent, we will not have any sensible difference in the final outcome for the ergodic theorem. This is can be experimentally proven by simulating the markov chain with different starting point for 500 times with different values in $X_{1000}$
+
+Once again at this point we declare a new object Markov Chain:
+
+```{r, include = TRUE, eval = FALSE}
+puppet_markov_chain = set_initial_state(puppet_markov_chain, 2)
+x_1000 <- c()
+for(i in 1:500){
+  mc <- MCSimulator(puppet_markov_chain)
+  x_1000[i] <- mc[1000]
+}
+
+l <- list(analytical_invariant_distribution, markov_simulation)
+multhist(l, beside = TRUE, freq = FALSE)
+
+```
